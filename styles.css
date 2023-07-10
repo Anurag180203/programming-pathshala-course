@@ -1,0 +1,47 @@
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50px;
+    color: blue;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+ul{
+    display: block;
+    position: relative;
+    list-style-type: none;
+}
+
+li{
+    margin-left: 30%;
+    font: 200 30px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+li:hover{
+    color:green;
+    font-weight: bold;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+button{
+    display: inline;
+    background-color: red;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    border: dotted;
+    cursor: pointer;
+    width: 20%;
+}

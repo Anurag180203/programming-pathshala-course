@@ -1,0 +1,20 @@
+.container{
+    max-width: 100%;
+    padding:10% 20%;
+}
+.functional-container{
+    padding: 10%;
+}
+.input-container{
+    width: 80%;
+    display: flex;
+    padding:5% 3%;
+    border:1px solid rgb(197,198,201);
+    justify-content: space-evenly;
+}
+.input{
+    width:80%;
+}
+.add{
+    width:20%;
+}
