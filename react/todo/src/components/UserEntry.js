@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { UserStateReducerContext } from "../userContext.js";
+import { deleteUser, updateUser } from "../client.js";
 
 // Pure functions -> no state of their own, no side effects, same input -> same output
 // React.memo() -> memoizes the component, only re-renders if props change
@@ -31,6 +32,13 @@ const UserEntry = (props) => {
     const changedEditState = () => {
         // concept of batching -> React batches state updates
         
+        if(editing){
+            updateUser(props.id, {
+                name: props.name,
+                college: props.college
+            }, dispatch);
+        }
+
         setEditing(!editing);
         // // setCount(count+1);
         // // setCount(count+1);
@@ -66,12 +74,16 @@ const UserEntry = (props) => {
             &nbsp; &nbsp; &nbsp; &nbsp;
             <button 
             //</li>onClick={() => props.deleteName(props.name)}
-            onClick={() => dispatch(
-                {
-                    "type": "delete",
-                    "name": props.name
-                }
-            )}>Delete entry</button>
+            // onClick={() => dispatch(
+            //     {
+            //         "type": "delete",
+            //         "name": props.name
+            //     }
+            // )
+            onClick={() => //console.log(props.id)
+                deleteUser(props.id, dispatch)
+            }
+            >Delete entry</button>
         </li>
         );
 }

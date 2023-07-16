@@ -1,5 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import UserEntry from "./components/UserEntry";
+// import axios from "axios";
+
+import {addUser,getAllUsers} from './client.js';
 // import {useState} from "react";
 // import {useReducer} from "react";
 // import { initialUserState, userStateReducer } from "./userStateReducer";
@@ -16,6 +19,7 @@ const App = () => {
 
   const users = useContext(UserStateContext);
   const dispatch = useContext(UserStateReducerContext);
+
   // const [users, dispatch] = useReducer(userStateReducer, initialUserState);
   // const deleteName = (name) => {
   //   // console.log(name);
@@ -30,6 +34,25 @@ const App = () => {
   //   })
   // }
 
+  // useEffect(() => {
+  //   axios.get("http://localhost:3050/getAllUsers")
+  //   .then((response) => {
+  //     dispatch({
+  //       "type": "create",
+  //       "data": response.data
+  //     })
+  //   })
+  // }, [dispatch]);
+
+  useEffect(() => {
+    getAllUsers(dispatch);  
+  }, [dispatch]);
+
+  // useEffect is called after the first render and after every render
+  // it is useful for side effects like making an api call at mounting or unmounting
+  // for synchronizing with external systems
+  // empty dependency array means useEffect will be called only after the first render
+
   const onSubmit = (e) => {
     e.preventDefault();
     // const name = e.target.elements.name.value;
@@ -38,11 +61,23 @@ const App = () => {
     // e.target.elements.college.value = '';
     // setUsers([...users, {name, college}]);
 
-    dispatch({
-      "type": "insert",
-      "name": e.target.elements.name.value,
-      "college": e.target.elements.college.value
-    })
+    // dispatch({
+    //   "type": "insert",
+    //   "name": e.target.elements.name.value,
+    //   "college": e.target.elements.college.value
+    // })
+
+    addUser(e.target.elements.name.value, e.target.elements.college.value,dispatch)
+
+    // axios.post("http://localhost:3050/addUser",{
+    //   "name": e.target.elements.name.value,
+    //   "college": e.target.elements.college.value
+    // }).then((response) => {
+    //   console.log(response);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+
   }
 
   const getAddUserForm = () => {
@@ -75,7 +110,10 @@ const App = () => {
 
   const getUserListHtml = () => {
     return users.map((user) => {
-      return <UserEntry key={user.name} name={user.name} college={user.college} gradYear={2020} 
+      return <UserEntry 
+      key={user.id} 
+      id={user.id}
+       name={user.name} college={user.college} gradYear={2020} 
       // deleteName={deleteName}
       //editUser={editUser}
       />;

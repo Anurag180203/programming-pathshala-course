@@ -31,6 +31,9 @@ const User = sequelize.define('users', {
     name:{
         type: DataTypes.STRING,
     },
+    college:{
+        type: DataTypes.STRING,
+    },
     email:{
         type: DataTypes.STRING,
     },
