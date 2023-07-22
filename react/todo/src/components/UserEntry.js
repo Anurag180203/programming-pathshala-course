@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserStateReducerContext } from "../userContext.js";
 import { deleteUser, updateUser } from "../client.js";
 
@@ -8,6 +8,14 @@ import { deleteUser, updateUser } from "../client.js";
 // currently not working as delete function is passed from parent
 
 const UserEntry = (props) => {
+
+    useEffect(() => {
+        console.log("rendered " + props.name);
+        return () => {
+            console.log("unmounted " + props.name);
+        }
+    }) // whatever is returned from useEffect is called when component unmounts
+    // runs on mounting, re-rendering and unmounting
 
     const spanStyle = {
         backgroundColor: "red", 

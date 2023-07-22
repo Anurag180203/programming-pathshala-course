@@ -1,6 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import UserEntry from "./components/UserEntry";
 // import axios from "axios";
+
+// import {useLocation} from "react-router-dom";
 
 import {addUser,getAllUsers} from './client.js';
 // import {useState} from "react";
@@ -15,6 +17,10 @@ import { UserStateContext, UserStateReducerContext } from "./userContext";
 // redux -- global state
 
 const App = () => {
+
+    // const location = useLocation();
+    // console.log(location);
+
   //const [users, setUsers] = useState([{name:'a',college:'A'},{name:'b',college:'B'},{name:'c',college:'C'}]);
 
   const users = useContext(UserStateContext);
@@ -79,6 +85,11 @@ const App = () => {
     // });
 
   }
+
+  useCallback(onSubmit, [dispatch]); // useCallback is used to memoize a function so that it is not recreated on every render
+  // like useMemo is used to memoize a value
+  // useRef is used to create a reference to a dom element
+
 
   const getAddUserForm = () => {
     return (
